@@ -1,0 +1,33 @@
+@import 'config';
+
+.remd-music {
+    padding-top: 20px;
+}
+.remd-title {
+    & {
+        position: relative;
+        padding-left: 9px;
+        margin-bottom: 14px;
+        font-size: 17px;
+        font-weight: 400;
+        height: 20px;
+        line-height: 20px;
+    }
+    &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 2px;
+        width: 2px;
+        height: 16px;
+        background: $remdTitleColor;
+    }
+}
+.remd-songs-list {
+    position: relative;
+}
+.remd-songs-ul {
+    position: relative;
+    display: flex;
+    padding-bottom: 16px;
+}
