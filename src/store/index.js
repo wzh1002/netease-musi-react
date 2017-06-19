@@ -1,5 +1,6 @@
-import { createStore, applyMiddleware } from 'redux';
-import reducer from '../reducers';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
+import homeReducer from '../page/Home/reducers';
+import songReducer from '../page/Song/reducers'
 
 const reduxThunk = ({ dispatch, getState }) => next => action => {
     if (typeof action === 'function') {
@@ -7,6 +8,11 @@ const reduxThunk = ({ dispatch, getState }) => next => action => {
     }
     return next(action);
 };
+
+const reducer = combineReducers({
+    Home: homeReducer,
+    Song: songReducer
+});
 
 const store = createStore(
     reducer,

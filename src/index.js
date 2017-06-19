@@ -1,10 +1,10 @@
-import  './sass/index.scss';
+import  './style/index.scss';
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, browserHistory } from 'react-router-dom';
 import store from './store';
-import { Home, Song } from './containers';
+import { Home, Song, Playlist } from './page';
 
 const app = (
     <Provider store={store}>
@@ -12,6 +12,7 @@ const app = (
             <div>
                 <Route exact path="/" component={Home}></Route>
                 <Route path="/song" component={Song}></Route>
+                <Route path="/playlist" component={Playlist}></Route>
             </div>
         </Router>
     </Provider>
