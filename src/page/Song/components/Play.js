@@ -1,22 +1,36 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
-class Play extends Component {
+class Play extends PureComponent {
 
     constructor(props) {
         super(props);
-        this.song = document.createElement('audio');
+
+        const song = document.createElement('audio');
+        const { updateIndexState } = this.props;
+        this.song = song;
+        this.listener = () => updateIndexState(song.currentTime)
+    }
+
+    componentDidMount() {
+        const { src } = this.props;
+        this.song.src = src;
+        this.listenPlay();
+        this.listenPause();
+        this.listenEnd();
+    }
+
+    componentWillUnmount() {
+        this.clear();
+        this.song.pause();
+        this.song = null;
     }
 
     listenProgress() {
-        const { updateProgress } = this.props;
-        const { song } = this;
-        this.timer = setInterval(() => {
-            updateProgress(song.currentTime);
-        }, 500);
+        this.song.addEventListener('timeupdate', this.listener);
     }
 
-    clear() {
-        clearInterval(this.timer);
+    clearListen() {
+        this.song.removeEventListener('timeupdate', this.updateProgress);
     }
 
     listenPlay() {
@@ -29,37 +43,23 @@ class Play extends Component {
     listenPause() {
         const self = this;
         this.song.addEventListener('pause', () => {
-            self.clear();
+            self.clearListen();
         })
     }
 
     listenEnd() {
-        const { updatePlayStatus, updateEndStatus } = this.props;
+        const { updatePlayState, updateEndState } = this.props;
         const self = this;
         this.song.addEventListener('ended', () => {
-            updatePlayStatus();
-            updateEndStatus(true);
-            self.clear();
+            updatePlayState();
+            updateEndState(true);
+            self.clearListen();
         });
-    }
-
-    componentDidMount() {
-        const { data } = this.props;
-        this.song.src = data[0].url;
-        this.listenPlay();
-        this.listenPause();
-        this.listenEnd();
-    }
-
-    componentWillUnmount() {
-        this.clear();
-        this.song.pause();
-        this.song = null;
     }
 
     render() {
         const { props, song } = this;
-        if (props.status.playing === false) {
+        if (props.playing === false) {
             song.pause();
         } else {
             song.play();

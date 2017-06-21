@@ -3,6 +3,7 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, browserHistory } from 'react-router-dom';
+import Perf from 'react-addons-perf';
 import store from './store';
 import { Home, Song, Playlist } from './page';
 
@@ -20,6 +21,7 @@ const app = (
 
 if (typeof window !== 'undefined') {
     window.store = store;
+    window.Perf = Perf;
 }
 
 render(

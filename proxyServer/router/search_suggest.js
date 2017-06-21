@@ -6,12 +6,12 @@ router.get("/", (req, res) => {
   const cookie = req.get('Cookie') ? req.get('Cookie') : ''
   const data = {
     "csrf_token": "",
-    s: req.query.keywords || req.query.keywords || ''
+    s: req.query.keywords || ''
   }
 
   createWebAPIRequest(
     'music.163.com',
-    '/weapi/search/suggest/web',
+    '/weapi/search/suggest/keyword',
     'POST',
     data,
     cookie,

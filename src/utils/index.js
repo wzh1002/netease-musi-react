@@ -14,7 +14,7 @@ const reducersCreator = (initialState, reducers) => (state = initialState, actio
 
 const serializeListen = num => `${Math.floor(num / 10000)}万`;
 
-const getType = obj => Object.prototype.call(obj).replace(/\[object\s/, '').replace(/\]/, '').toLowerCase();
+const getType = obj => Object.prototype.toString.call(obj).replace(/\[[^\]]+\s(\w+)\]$/, ($0, $1) => $1.toLowerCase());
 
 const classNames = (...args) => {
     let classLists = [];

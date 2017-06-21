@@ -6,7 +6,8 @@ const vendors = [
     'react-dom',
     'redux',
     'react-redux',
-    'react-router-dom'
+    'react-router-dom',
+    'react-addons-perf'
 ];
 
 const dir = resolve(__dirname, 'static');
