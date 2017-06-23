@@ -13,16 +13,15 @@ class Song extends Component {
 
         this.lyricsMapArr = [];
         this.isParse = false;
+        this.state = {
+            playing: false,
+            index: 0,
+            end: false
+        };
         this.updatePlayState = this.updatePlayState.bind(this);
         this.updateIndexState = this.updateIndexState.bind(this);
         this.updateEndState = this.updateEndState.bind(this);
     }
-
-    state = {
-        playing: false,
-        index: 0,
-        end: false
-    };
 
     componentDidMount() {
         this.fetchData();
